@@ -1,0 +1,16 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+/ios/
+
+# Imported translations (automatically generated)
+*.translation
+
+# Mono/C# builds (si usas C# en el futuro)
+.mono/
+.vscode/
+*.csproj
+*.sln
+
+# MacOS system files (Basura de Mac)
+.DS_Store

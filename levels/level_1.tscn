@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://blud7s83s5krs"]
+
+[ext_resource type="PackedScene" uid="uid://cqq2v2ek7ebge" path="res://player/player.tscn" id="1_vn7o3"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a202f"]
+size = Vector2(10, 10)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_noarx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
+size = Vector3(10, 0, 10)
+
+[sub_resource type="Sky" id="Sky_4xowi"]
+
+[sub_resource type="Environment" id="Environment_a202f"]
+background_mode = 2
+sky = SubResource("Sky_4xowi")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_vn7o3")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_a202f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+physics_material_override = SubResource("PhysicsMaterial_noarx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_noarx")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a202f")
