@@ -79,13 +79,19 @@ func _physics_process(delta):
 	velocity.z = input_dir.z * SPEED
 	
 	# --- NUEVO: ROTACIÓN DEL MODELO EN 3RA PERSONA ---
-	if not is_fps and input_dir != Vector3.ZERO:
-		# Calculamos el ángulo hacia el que nos movemos
-		var target_rotation = atan2(input_dir.x, input_dir.z)
-		# Aplicamos la rotación de forma suave (lerp) solo al modelo visual
+	# 1. Obtenemos el movimiento "puro" de las teclas (sin rotación de cámara)
+	var raw_input = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+
+	# 2. Nueva lógica de rotación corregida
+	if not is_fps and raw_input != Vector2.ZERO:
+		# Calculamos el ángulo basándonos solo en las teclas presionadas
+		# Usamos -raw_input porque en Godot -Z es hacia adelante
+		var target_rotation = atan2(-raw_input.x, -raw_input.y)
+		
+		# Aplicamos la rotación suave
 		model.rotation.y = lerp_angle(model.rotation.y, target_rotation, delta * 10.0)
 	elif is_fps:
-		# En primera persona, el modelo siempre debe mirar hacia adelante
+		# En primera persona siempre miramos al frente
 		model.rotation.y = 0
 		
 	move_and_slide()
