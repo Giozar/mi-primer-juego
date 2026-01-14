@@ -77,5 +77,15 @@ func _physics_process(delta):
 
 	velocity.x = input_dir.x * SPEED
 	velocity.z = input_dir.z * SPEED
-
+	
+	# --- NUEVO: ROTACIÓN DEL MODELO EN 3RA PERSONA ---
+	if not is_fps and input_dir != Vector3.ZERO:
+		# Calculamos el ángulo hacia el que nos movemos
+		var target_rotation = atan2(input_dir.x, input_dir.z)
+		# Aplicamos la rotación de forma suave (lerp) solo al modelo visual
+		model.rotation.y = lerp_angle(model.rotation.y, target_rotation, delta * 10.0)
+	elif is_fps:
+		# En primera persona, el modelo siempre debe mirar hacia adelante
+		model.rotation.y = 0
+		
 	move_and_slide()
