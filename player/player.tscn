@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqq2v2ek7ebge"]
+[gd_scene load_steps=6 format=3 uid="uid://cqq2v2ek7ebge"]
 
 [ext_resource type="Script" uid="uid://dgim08km56naq" path="res://player/player.gd" id="1_5kvr3"]
+[ext_resource type="PackedScene" uid="uid://b8llkq132s30r" path="res://player/model/XBot.fbx" id="2_rkbax"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4xowi"]
 
@@ -25,6 +26,7 @@ mesh = SubResource("CapsuleMesh_oul6g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
+visible = false
 mesh = SubResource("BoxMesh_oul6g")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
@@ -32,3 +34,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 spring_length = 3.0
 
 [node name="CameraTPS" type="Camera3D" parent="SpringArm3D"]
+
+[node name="XBot" parent="." instance=ExtResource("2_rkbax")]
+
+[editable path="XBot"]
