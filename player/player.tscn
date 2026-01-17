@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqq2v2ek7ebge"]
+[gd_scene load_steps=7 format=3 uid="uid://cqq2v2ek7ebge"]
 
 [ext_resource type="Script" uid="uid://dgim08km56naq" path="res://player/player.gd" id="1_5kvr3"]
 [ext_resource type="PackedScene" uid="uid://b8llkq132s30r" path="res://player/model/XBot.fbx" id="2_rkbax"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_oul6g"]
 size = Vector3(0.2, 0.2, 0.8)
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rkbax"]
+graph_offset = Vector2(110.81999, -11.587481)
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_5kvr3")
@@ -38,5 +41,31 @@ spring_length = 3.0
 
 [node name="XBot" parent="." instance=ExtResource("2_rkbax")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="Skeleton3D" parent="XBot" index="0"]
+bones/11/rotation = Quaternion(0.25328445, 0.06161831, -0.22821012, 0.9380673)
+bones/15/rotation = Quaternion(-6.059331e-07, -3.5123633e-09, -0.00016412164, 1)
+bones/16/rotation = Quaternion(-1.0175024e-12, -7.403214e-17, 0.00025564426, 0.99999994)
+bones/17/rotation = Quaternion(-1.62956e-11, 1.5476178e-15, -8.792197e-05, 1)
+bones/19/rotation = Quaternion(-9.781721e-07, -3.121099e-09, -0.00050166, 0.9999999)
+bones/20/rotation = Quaternion(-2.907803e-13, -4.466296e-17, 0.00084987143, 0.99999964)
+bones/21/rotation = Quaternion(-2.1012957e-12, 7.8676703e-16, -0.000321842, 0.99999994)
+bones/23/rotation = Quaternion(6.9630715e-08, -3.6009493e-09, 0.00015597518, 1)
+bones/24/rotation = Quaternion(1.2938923e-12, -1.1683024e-16, -0.0002215151, 1)
+bones/25/rotation = Quaternion(-5.7574453e-13, -1.405226e-16, -0.0001128051, 1)
+bones/27/rotation = Quaternion(4.6707178e-06, -1.1806582e-09, 0.0005205089, 0.9999999)
+bones/28/rotation = Quaternion(7.112911e-14, -1.3425774e-16, 0.00084623165, 0.99999964)
+bones/29/rotation = Quaternion(-2.4935274e-14, 5.581063e-17, -0.0004967778, 0.9999999)
+bones/39/rotation = Quaternion(6.66576e-07, -2.9847864e-11, -4.4076518e-05, 1)
+bones/41/rotation = Quaternion(3.3475052e-07, -2.2176923e-11, -6.624911e-05, 1)
+bones/43/rotation = Quaternion(4.0847357e-07, -1.3394237e-11, -3.1646407e-05, 1)
+bones/44/rotation = Quaternion(-1.6358385e-07, -3.4673466e-12, 2.1196141e-05, 1)
+bones/45/rotation = Quaternion(-4.275899e-07, -8.846623e-12, 2.0689502e-05, 1)
+bones/51/rotation = Quaternion(-4.9755376e-06, 1.0177631e-08, 0.0020448025, 0.9999979)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../XBot")
+tree_root = SubResource("AnimationNodeStateMachine_rkbax")
+anim_player = NodePath("../XBot/AnimationPlayer")
 
 [editable path="XBot"]
