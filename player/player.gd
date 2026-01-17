@@ -96,6 +96,8 @@ func _physics_process(delta):
 		model.rotation.y = lerp_angle(model.rotation.y, target_rotation, delta * 10.0)
 	elif is_fps:
 		# En primera persona siempre miramos al frente
-		model.rotation.y = 0
+		# model.rotation.y = 0
+		# En primera persona también aplicamos el desfase de 180 grados (PI)
+		model.rotation.y = PI
 		
 	move_and_slide()
