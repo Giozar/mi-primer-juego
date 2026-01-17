@@ -10,7 +10,7 @@ const GRAVITY = 9.8
 @onready var camera_fps = $CameraFPS      # Referencia a la cámara de primera persona
 @onready var camera_tps = $SpringArm3D/CameraTPS # Referencia a la cámara de tercera persona
 @onready var spring_arm = $SpringArm3D    # El brazo que sujeta la cámara TPS
-@onready var model = $MeshInstance3D      # El modelo (la cápsula)
+@onready var model = $XBot      # El modelo (la cápsula)
 
 # --- VARIABLE DE ESTADO ---
 var is_fps = true # Por defecto empezamos en primera persona
@@ -86,7 +86,11 @@ func _physics_process(delta):
 	if not is_fps and raw_input != Vector2.ZERO:
 		# Calculamos el ángulo basándonos solo en las teclas presionadas
 		# Usamos -raw_input porque en Godot -Z es hacia adelante
-		var target_rotation = atan2(-raw_input.x, -raw_input.y)
+		#var target_rotation = atan2(-raw_input.x, -raw_input.y)
+		
+				# Añadimos + PI para girar el modelo 180 grados sobre su propio eje
+		var target_rotation = atan2(-raw_input.x, -raw_input.y) + PI
+		
 		
 		# Aplicamos la rotación suave
 		model.rotation.y = lerp_angle(model.rotation.y, target_rotation, delta * 10.0)
